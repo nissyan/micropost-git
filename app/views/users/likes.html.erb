@@ -1,4 +1,4 @@
-<h1>Users#show</h1>
+<h1>お気に入り一覧</h1>
 <div class="row">
   <aside class="col-xs-4">
     <div class="panel panel-default">
@@ -18,6 +18,6 @@
       <li class="<%= 'active' if current_page?(followers_user_path(@user)) %>"><%= link_to followers_user_path(@user) do %>Followers <span class="badge"><%= @count_followers %></span><% end %></li>
       <li class="<%= 'active' if current_page?(likes_user_path(@user)) %>"><%= link_to likes_user_path(@user) do %>Likes <span class="badge"><%= @count_likes %></span><% end %></li>
     </ul>
-    <%= render 'microposts/microposts', microposts: @microposts %>
+    <%= render 'microposts/microposts', microposts: @likes %>
   </div>
 </div>

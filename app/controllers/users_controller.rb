@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :require_user_logged_in, only: [:index, :show, :followings, :followers]
+ before_action :require_user_logged_in, only: [:index, :show, :followings, :followers, :likes]
   
   def index
     @users = User.all.page(params[:page])
@@ -14,10 +14,9 @@ class UsersController < ApplicationController
   def new
     @user = User.new
   end
-
+  
   def create
     @user = User.new(user_params)
-    
     if @user.save
       flash[:success] = 'ユーザを登録しました。'
       redirect_to @user
@@ -34,11 +33,16 @@ class UsersController < ApplicationController
   end
   
   def followers
-    @user = Usre.find(params[:id])
+    @user = User.find(params[:id])
     @followers = @user.followers.page(params[:page])
     counts(@user)
   end
-
+  
+  def likes
+    @user = User.find(params[:id])
+    @likes = @user.like_microposts.page(params[:page])
+    counts(@user)
+  end
 
   private
 
